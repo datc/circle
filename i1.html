@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>i1</title>
+<style type="text/css">
+	.container{
+		margin: 30px;
+	}
+	.sub{
+		float: left;
+		width: 320px;
+		margin: 3px;
+	}
+	img{
+		width:320px;
+        border-radius:20px;
+	}
+</style>
+</head>
+<body>
+<div class="container">
+	<div class="sub" id="sub0"></div>
+	<div class="sub" id="sub1"></div>
+	<div class="sub" id="sub2"></div>
+	<div class="sub" id="sub3"></div>
+</div>
+<script src="http://7xku3c.com1.z0.glb.clouddn.com/static/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	load("/data.json");
+});
+
+	var xmlhttp = new XMLHttpRequest();
+
+    function load(url) {
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var data = JSON.parse(xmlhttp.responseText);
+                setData(data);
+            }
+        };
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
+
+    function setData(arr) {
+        var pics = new Array(4);
+        for (var i = pics.length - 1; i >= 0; i--) {
+        	pics[i]=""
+        }
+        var i;
+        var value="";
+        for (i = 0; i < arr.length; i++) {
+            value=arr[i].value;
+            pics[i%4] += '<img width="300px" src="' + value + '">';
+        }
+        for (var i = pics.length - 1; i >= 0; i--) {
+        	document.getElementById("sub"+(i)).innerHTML = pics[i];
+        }
+    }
+</script>
+
+</body>
+</html>
